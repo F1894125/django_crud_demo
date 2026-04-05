@@ -1,0 +1,60 @@
+{% extends "student/base.html" %}
+
+
+{% block title %}
+    <title>Edit Student</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags}}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Edit an Existing Student</h1>
+    <form class="form_body"action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="find_student">
+
+        <label for="roll_no">Roll No:</label>
+        <input type="text" name="roll_no" id="roll_no">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if student_exists %}
+    <h2 class="h2_body">Updating Student with Roll No: {{ roll_no }}</h2>
+        <form class="form_body" action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="update_student">
+            
+            <label for="old_roll_no">Old Roll No:</label>
+            <input type="text" name="old_roll_no" id="old_roll_no" value={{ roll_no }} readonly>
+
+            <label for="new_roll_no">New Roll No:</label>
+            <input type="text" name="new_roll_no" id="new_roll_no">
+
+            <label for="new_first_name">New First Name:</label>
+            <input type="text" name="new_first_name" id="new_first_name">
+
+            <label for="new_last_name">New Last Name:</label>
+            <input type="text" name="new_last_name" id="new_last_name">
+
+            <label for="new_major">New Major:</label>
+            <input type="text" name="new_major" id="new_major">
+
+            <label for="new_subject_1">New Subject 1:</label>
+            <input type="text" name="new_subject_1" id="new_subject_1">
+
+            <label for="new_subject_2">New Subject 2:</label>
+            <input type="text" name="new_subject_2" id="new_subject_2">
+
+            <label for="new_subject_3">New Subject 3:</label>
+            <input type="text" name="new_subject_3" id="new_subject_3">
+
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+{% endblock content %}

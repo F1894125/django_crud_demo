@@ -1,0 +1,52 @@
+{% extends "form/base.html" %}
+
+
+{% block title %}
+    <title>Edit User</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags}}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Edit an Existing User</h1>
+    <form class="form_body"action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="find_user">
+
+        <label for="old_username">Old Username:</label>
+        <input type="text" name="old_username" id="old_username">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if user_exists %}
+        <form class="form_body" action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="update_user">
+            
+            <label for="old_username">Old Username:</label>
+            <input type="text" name="old_username" id="old_username" value="{{ user_to_edit.username }}" readonly>
+
+            <label for="new_username">New Username:</label>
+            <input type="text" name="new_username" id="new_username">
+
+            <label for="new_first_name">New First Name:</label>
+            <input type="text" name="new_first_name" id="new_first_name">
+
+            <label for="new_last_name">New Last Name:</label>
+            <input type="text" name="new_last_name" id="new_last_name">
+
+            <label for="new_age">New Age:</label>
+            <input type="text" name="new_age" id="new_age">
+
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+
+    {% include "form/users_list.html" %}
+{% endblock content %}

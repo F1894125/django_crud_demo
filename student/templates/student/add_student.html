@@ -1,0 +1,42 @@
+{% extends "student/base.html" %}
+
+
+{% block title %}
+    <title>Add Student</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags}}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Add a New Student</h1>
+    <form  class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <label for="roll_no">Roll No:</label>
+        <input type="text" name="roll_no" id="roll_no">
+
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name">
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name">
+
+        <label for="major">Major:</label>
+        <input type="text" name="major" id="major">
+
+        <label for="subject_1">Subject 1:</label>
+        <input type="text" name="subject_1" id="subject_1">
+
+        <label for="subject_2">Subject 2:</label>
+        <input type="text" name="subject_2" id="subject_2">
+
+        <label for="subject_3">Subject 3:</label>
+        <input type="text" name="subject_3" id="subject_3">
+
+        <button type="submit">Submit</button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,29 @@
+<form  class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="test_value">Test Value:</label>
+            <input type="text" name="test_value" id="test_value">
+        </div>
+
+        <div>
+            <label for="a">Left Foot (a):</label>
+            <input type="text" name="a" id="a">
+        </div>
+
+        <div>
+            <label for="b">Left Shoulder (b):</label>
+            <input type="text" name="b" id="b">
+        </div>
+
+        <div>
+            <label for="c">Right Shoulder (c):</label>
+            <input type="text" name="c" id="c">
+        </div>
+
+        <div>
+            <label for="d">Right Foot (d):</label>
+            <input type="text" name="d" id="d">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>

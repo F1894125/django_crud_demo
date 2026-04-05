@@ -1,0 +1,40 @@
+{% extends "form/base.html" %}
+
+
+{% block title %}
+    <title>Delete User</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags}}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Delete an Existing User</h1>
+    <form class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="delete_target_user">
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if user_exists %}
+        <h2>Are you sure you want to delete user "{{ user_to_delete.username }}"?</h2>
+
+        <form class="form_body" action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="confirm_delete_user">
+            <input type="hidden" name="target_username" value="{{ user_to_delete.username }}">
+
+            <button type="submit">Yes, Delete User</button>
+        </form>
+    {% endif %}
+
+    {% include "form/users_list.html" %}
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "student/base.html" %}
+
+
+{% block title %}
+    <title>Delete Student</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags}}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Delete an Existing Student</h1>
+    <form class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="delete_target_student">
+        <label for="roll_no">Roll No:</label>
+        <input type="text" name="roll_no" id="roll_no">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if student_exists %}
+        <h2>Are you sure you want to delete student with roll no. "{{ roll_no }}"?</h2>
+
+        <form class="form_body" action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="confirm_delete_student">
+            <input type="hidden" name="target_roll_no" value="{{ roll_no }}">
+
+            <button type="submit">Yes, Delete Student</button>
+        </form>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends "fuzzy/base.html" %}
+
+
+{% block title %}
+    <title>Delete Test</title>
+{% endblock title %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags}}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Delete an Existing Test</h1>
+    <form class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="delete_target_test">
+
+        <div>
+            <input type="radio" name="membership_function" value="triangular" id="triangular_option">
+            <label for="triangular_option">Triangular</label>
+        </div>
+
+        <div>
+            <input type="radio" name="membership_function" value="trapezoidal" id="trapezoidal_option">
+            <label for="trapezoidal_option">Trapezoidal</label>
+        </div>
+
+        <div>
+            
+            <input type="radio" name="membership_function" value="gaussian" id="gaussian_option">
+            <label for="gaussian_option">Gaussian</label>
+        </div>
+
+        <div>
+            <label for="test_value">Test Value:</label>
+            <input type="text" name="test_value" id="test_value">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if test_exists %}
+        <h2>Are you sure you want to delete test "{{ test_to_delete.x }}"?</h2>
+
+        <form class="form_body" action="" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="confirm_delete_test">
+            <input type="hidden" name="target_test" value="{{ test_to_delete.x }}">
+            <input type="hidden" name="membership_function" value="{{ membership_function }}">
+
+            <button type="submit">Yes, Delete Test</button>
+        </form>
+    {% endif %}
+
+    {% include "fuzzy/tests_list.html" %}
+{% endblock content %}

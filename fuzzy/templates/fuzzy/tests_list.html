@@ -1,0 +1,23 @@
+{% if tests %}
+    <div class="existing_list">
+        <h2 class="h2_body">Existing Tests with {{ membership_function }} Membership</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Test Value</th>
+                    <th>Membership Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in tests %}
+                <tr>
+                    <td>{{ test.id }}</td>
+                    <td>{{ test.x }}</td>
+                    <td>{{ test.membership|floatformat:"2" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}

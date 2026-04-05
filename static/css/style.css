@@ -1,0 +1,163 @@
+* {
+    margin: 5px; /* This adds a small margin around all elements to prevent them from sticking to the edges of the page */
+    padding: 5px; /* This adds a small padding inside all elements to prevent the content from sticking to the edges of the elements */
+    box-sizing: border-box; /* This ensures that the padding and border are included in the total width and height of the elements */
+    font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', monospace; /* This sets Matrix font */
+    color: rgb(0, 255, 65); /* This sets Matrix green color for the text */
+    background: rgb(0, 0, 0); /* This sets a solid black background color for the entire page */
+}
+
+@keyframes color_breathing_effect {
+    0%, 100% {
+        color: rgb(0, 255, 65); /* Matrix green at the start and end of the animation */ 
+    }
+    50% {
+        color: rgb(0, 150, 30); /* A slightly darker green to create the breathing effect */
+    }
+}
+
+@keyframes background_breathing_effect {
+    0%, 100% {
+        background-color: rgb(0, 255, 65);
+    }
+    50% {
+        background-color: rgb(0, 150, 30);
+    }
+}
+
+header {
+    display: flex; /* This makes the header adapt to the width of the page */
+    justify-content: center; /* This horizontally centers the content within the header */
+    align-items: center; /* This vertically centers the content within the header */
+    padding: 10px 20px;
+    border: 2px solid rgb(0, 255, 65); /* This adds a bright green border around the header to make it stand out against the background */
+    border-radius: 10px; /* This rounds the corners of the header for a softer and more modern look */
+    box-shadow: 0 4px 8px rgba(0, 255, 65, 0.5); /* This adds a subtle shadow below the header for a slight depth effect */
+    text-align: center; /* This centers the text within the header */
+}
+
+header nav ul {
+    list-style: none; /* This removes the default bullet points from the list */
+    display: flex;
+    gap: 100px; /* This adds space between the navigation links */
+    align-items: center;
+    justify-content: center;
+}
+
+header nav ul li a {
+    text-decoration: none; /* This removes the underline from the links */
+    font-weight: 800; /* This makes the links slightly bolder for better visibility */
+    transition: color 0.3s ease; /* This adds a smooth transition effect when hovering over the links, it's the "what" of the animation */
+}
+
+header nav ul li a:hover { /* This applies the breathing effect animation to the links when hovered, it's the "when" of the animation */
+    animation: color_breathing_effect 2.5s ease-in-out infinite;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* This stacks the content vertically */
+    align-items: center;
+    line-height: 1.6; /* This is for line spacing */
+}
+
+.alert.success {
+    box-shadow: 0 2px 4px rgba(0, 255, 65, 0.5);
+    margin-top: 20px; /* This adds some space above the success messages to separate them from the content */
+    color: rgb(0, 255, 65);
+}
+
+.alert.error {
+    box-shadow: 0 2px 4px rgba(255, 0, 0, 0.5);
+    margin-top: 20px;
+    color: rgb(255, 0, 0);
+}
+
+.alert.warning {
+    box-shadow: 0 2px 4px rgba(255, 255, 0, 0.5);
+    margin-top: 20px;
+    color: rgb(255, 255, 0);
+}
+
+.h1_body {
+    margin-top: 50px;
+    font-size: 3em; /* This sets a larger font size by multiplying the base font size by 3 to make the main heading more prominent */
+    text-align: center;
+    width: 50%;
+}
+
+.h2_body {
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 255, 65);
+    border-radius: 5px;
+    border: 2px solid rgb(0, 255, 65);
+    padding: 0px 10px;
+}
+
+.form_body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* This adds space between the form elements to prevent them from sticking together */
+    padding: 10px 40px;
+    margin-top: 30px;
+    border: 2px solid rgb(0, 255, 65);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 255, 65, 0.5);
+}
+
+form.form_body label {
+    font-weight: 1000; /* This makes the form labels bolder for better visibility */
+    margin-right: 10px;
+}
+
+form.form_body div {
+    display: flex;
+    align-items: center;
+}
+
+form.form_body input {
+    padding: 5px;
+    border: 2px solid rgb(0, 255, 65);
+    border-radius: 5px;
+}
+
+form.form_body button {
+    padding: 10px 30px;
+    border: none; /* This removes the default border from the buttons */
+    border-radius: 5px;
+    background-color: rgb(0, 255, 65);
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form.form_body button:hover {
+    animation: background_breathing_effect 2.5s ease-in-out infinite;
+}
+
+div.existing_list {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 255, 65, 0.5);
+    padding: 20px;
+}
+
+div.existing_list table {
+    margin: 20px;
+    border-collapse: collapse;
+    border-color: rgb(0, 255, 65);
+    border-style: solid;
+    border-width: 2px;
+    width: 100%;
+}
+
+div.existing_list table th, div.existing_list table td {
+    border-top: 1px solid rgb(0, 255, 65);
+    border-bottom: 1px solid rgb(0, 255, 65);
+    padding: 10px;
+    text-align: center;
+}

@@ -1,0 +1,12 @@
+{% load static %}
+
+<header class="header">
+    <nav>
+        <ul>
+            <li><a href="{% url 'form:home' %}">Home</a></li>
+            <li><a href="{% url 'form:add_user' %}">Add User</a></li>
+            <li><a href="{% url 'form:edit_user' %}">Edit User</a></li>
+            <li><a href="{% url "form:delete_user" %}">Delete User</a></li>
+        </ul>
+    </nav>
+</header>

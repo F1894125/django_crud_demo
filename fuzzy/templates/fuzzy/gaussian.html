@@ -1,0 +1,19 @@
+<form  class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="test_value">Test Value:</label>
+            <input type="text" name="test_value" id="test_value">
+        </div>
+
+        <div>
+            <label for="mu">Mean (mu):</label>
+            <input type="text" name="mu" id="mu">
+        </div>
+
+        <div>
+            <label for="sigma">Standard Deviation (sigma):</label>
+            <input type="text" name="sigma" id="sigma">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
