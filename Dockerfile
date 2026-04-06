@@ -4,7 +4,7 @@ WORKDIR /django_crud_demo
 
 COPY . .
 
-RUN pip install django==5.2.12
+RUN pip install -r requirements.txt
 
 RUN chmod +x start.sh
 
