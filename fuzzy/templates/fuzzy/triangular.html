@@ -1,24 +1,22 @@
 <form  class="form_body" action="" method="POST">
-        {% csrf_token %}
-        <div>
-            <label for="test_value">Test Value (x):</label>
-            <input type="text" name="test_value" id="test_value">
-        </div>
-
-        <div>
-            <label for="a">Left Foot (a):</label>
-            <input type="text" name="a" id="a">
-        </div>
-
-        <div>
-            <label for="b">Peak (b):</label>
-            <input type="text" name="b" id="b">
-        </div>
-
-        <div>
-            <label for="c">Right Foot (c):</label>
-            <input type="text" name="c" id="c">
-        </div>
-
-        <button type="submit">Submit</button>
-    </form>
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="new_entries">
+    
+    <table>
+        <tr>
+            <th>Test Value (x)</th>
+            <th>Left Foot (a)</th>
+            <th>Peak (b)</th>
+            <th>Right Foot (c)</th>
+        </tr>
+        {% for i in new_entry_count %}
+        <tr>
+            <td><input type="text" name="entries[{{ i }}][x]" id="x_{{ i }}"></td>
+            <td><input type="text" name="entries[{{ i }}][a]" id="a_{{ i }}"></td>
+            <td><input type="text" name="entries[{{ i }}][b]" id="b_{{ i }}"></td>
+            <td><input type="text" name="entries[{{ i }}][c]" id="c_{{ i }}"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Submit</button>
+</form>

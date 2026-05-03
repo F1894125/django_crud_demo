@@ -38,13 +38,13 @@ def trapezoidal_membership(x, a, b, c, d):
     else:
         return 0
 
-def gaussian_membership(x, mean, sigma):
+def gaussian_membership(x, mu, sigma):
     """
     Calculate the Gaussian membership value for a given input x and parameters mean and sigma.
     mean: the center of the Gaussian curve.
     sigma: the standard deviation of the Gaussian curve.
     """
-    return math.exp(-0.5 * ((x - mean) / sigma) ** 2)
+    return math.exp(-0.5 * ((x - mu) / sigma) ** 2)
 
 def home(request):
     return render(request, 'fuzzy/home.html')
@@ -59,23 +59,22 @@ def fuzzy_triangular(request):
 
     if request.method == 'POST':
         if all(request.POST.values()):
-            test_value = float(request.POST.get('test_value'))
-            if test_value in tests.values_list('x', flat=True):
-                messages.warning(request, 'Test value already exists.')
-            else:
-                a = float(request.POST.get('a'))
-                b = float(request.POST.get('b'))
-                c = float(request.POST.get('c'))
-                membership_value = triangular_membership(test_value, a, b, c)
-                triangular_membership_test = TriangularMembership(
-                    x=test_value,
-                    a=a,
-                    b=b,
-                    c=c,
-                    membership=membership_value
+            new_entry_count = int(request.POST.get('new_entry_count'))
+            for i in range(new_entry_count):
+                x, a, b, c = (
+                    float(request.POST.get(f'entries[{i}][x]')),
+                    float(request.POST.get(f'entries[{i}][a]')),
+                    float(request.POST.get(f'entries[{i}][b]')),
+                    float(request.POST.get(f'entries[{i}][c]'))
                 )
-                triangular_membership_test.save()
-                messages.success(request, f'Triangular membership calculated successfully for {test_value}.')
+                if tests.filter(x=x, a=a, b=b, c=c).exists():
+                    messages.warning(request, f'Set of values x={x}, a={a}, b={b}, c={c} already exists.')
+                else:
+                    membership = triangular_membership(x, a, b, c)
+                    triangular = TriangularMembership(x=x, a=a, b=b, c=c, membership=membership)
+                    triangular.save()
+            else:
+                messages.success(request, f'All {new_entry_count} new entries added.')
                 return render(request, 'fuzzy/fuzzy_estimator.html', context)
         
         else:
@@ -94,31 +93,29 @@ def fuzzy_trapezoidal(request):
 
     if request.method == 'POST':
         if all(request.POST.values()):
-            test_value = float(request.POST.get('test_value'))
-            if test_value in tests.values_list('x', flat=True):
-                messages.warning(request, 'Test value already exists.')
-            else:
-                a = float(request.POST.get('a'))
-                b = float(request.POST.get('b'))
-                c = float(request.POST.get('c'))
-                d = float(request.POST.get('d'))
-                membership_value = trapezoidal_membership(test_value, a, b, c, d)
-                trapezoidal_membership_test = TrapezoidalMembership(
-                    x=test_value,
-                    a=a,
-                    b=b,
-                    c=c,
-                    d=d,
-                    membership=membership_value
+            new_entry_count = int(request.POST.get('new_entry_count'))
+            for i in range(new_entry_count):
+                x, a, b, c, d = (
+                    float(request.POST.get(f'entries[{i}][x]')),
+                    float(request.POST.get(f'entries[{i}][a]')),
+                    float(request.POST.get(f'entries[{i}][b]')),
+                    float(request.POST.get(f'entries[{i}][c]')),
+                    float(request.POST.get(f'entries[{i}][d]'))
                 )
-                trapezoidal_membership_test.save()
-                messages.success(request, f'Trapezoidal membership calculated successfully for {test_value}.')
+                if tests.filter(x=x, a=a, b=b, c=c).exists():
+                    messages.warning(request, f'Set of values x={x}, a={a}, b={b}, c={c}, d={d} already exists.')
+                else:
+                    membership = trapezoidal_membership(x, a, b, c, d)
+                    trapezoidal = TrapezoidalMembership(x=x, a=a, b=b, c=c, d=d, membership=membership)
+                    trapezoidal.save()
+            else:
+                messages.success(request, f'All {new_entry_count} new entries added.')
                 return render(request, 'fuzzy/fuzzy_estimator.html', context)
         
         else:
             messages.error(request, 'Please fill in all fields.')
             return render(request, 'fuzzy/fuzzy_estimator.html', context)
-    
+            
     return render(request, 'fuzzy/fuzzy_estimator.html', context)
 
 
@@ -131,21 +128,21 @@ def fuzzy_gaussian(request):
 
     if request.method == 'POST':
         if all(request.POST.values()):
-            test_value = float(request.POST.get('test_value'))
-            if test_value in tests.values_list('x', flat=True):
-                messages.warning(request, 'Test value already exists.')
-            else:
-                mu = float(request.POST.get('mu'))
-                sigma = float(request.POST.get('sigma'))
-                membership_value = gaussian_membership(test_value, mu, sigma)
-                gaussian_membership_test = GaussianMembership(
-                    x=test_value,
-                    mu=mu,
-                    sigma=sigma,
-                    membership=membership_value
+            new_entry_count = int(request.POST.get('new_entry_count'))
+            for i in range(new_entry_count):
+                x, mu, sigma = (
+                    float(request.POST.get(f'entries[{i}][x]')),
+                    float(request.POST.get(f'entries[{i}][mu]')),
+                    float(request.POST.get(f'entries[{i}][sigma]')),
                 )
-                gaussian_membership_test.save()
-                messages.success(request, f'Gaussian membership calculated successfully for {test_value}.')
+                if tests.filter(x=x, mu=mu, sigma=sigma).exists():
+                    messages.warning(request, f'Set of values x={x}, a={mu}, sigma={sigma} already exists.')
+                else:
+                    membership = gaussian_membership(x, mu, sigma)
+                    gaussian = GaussianMembership(x=x, mu=mu, sigma=sigma, membership=membership)
+                    gaussian.save()
+            else:
+                messages.success(request, f'All {new_entry_count} new entries added.')
                 return render(request, 'fuzzy/fuzzy_estimator.html', context)
         
         else:

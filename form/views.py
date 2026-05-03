@@ -31,7 +31,6 @@ def add_user(request):
             messages.error(request, "Please fill all the fields.")
             return render(request, 'form/add_user.html')
     
-    users = User.objects.all()
     return render(request, 'form/add_user.html', context)
 
 

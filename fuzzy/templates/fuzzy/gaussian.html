@@ -1,19 +1,20 @@
-<form  class="form_body" action="" method="POST">
-        {% csrf_token %}
-        <div>
-            <label for="test_value">Test Value:</label>
-            <input type="text" name="test_value" id="test_value">
-        </div>
-
-        <div>
-            <label for="mu">Mean (mu):</label>
-            <input type="text" name="mu" id="mu">
-        </div>
-
-        <div>
-            <label for="sigma">Standard Deviation (sigma):</label>
-            <input type="text" name="sigma" id="sigma">
-        </div>
-
-        <button type="submit">Submit</button>
-    </form>
+<form class="form_body" action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="new_entries">
+    
+    <table>
+        <tr>
+            <th>Test Value (x)</th>
+            <th>Mean(mu)</th>
+            <th>Standard Deviation (sigma)</th>
+        </tr>
+        {% for i in new_entry_count %}
+        <tr>
+            <td><input type="text" name="entries[{{ i }}][x]" id="x_{{ i }}"></td>
+            <td><input type="text" name="entries[{{ i }}][mu]" id="mu_{{ i }}"></td>
+            <td><input type="text" name="entries[{{ i }}][sigma]" id="sigma_{{ i }}"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Submit</button>
+</form>

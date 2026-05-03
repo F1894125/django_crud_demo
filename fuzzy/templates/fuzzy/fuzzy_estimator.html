@@ -14,6 +14,54 @@
     {% endif %}
 
     <h1 class="h1_body">Perform a New {{ membership_function }} Membership Test</h1>
-    {% include "fuzzy/"|add:membership_function|lower|add:".html" %}
-    {% include "fuzzy/tests_list.html" %}
+    <form class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="membership_function" value="{{ membership_function }}">
+
+        <label for="new_entry_count">Enter the number of new entries you want to add:</label>
+        <input type="text" name="new_entry_count" id="new_entry_count" placeholder="e.g., 3">
+
+        <button type="button" id="add_rows">Add Rows</button>
+
+        <div id="new_entries_container" class="existing_list">
+            <p>(After entering the number of new entries, click "Add Rows" to generate input fields for each entry.)</p>
+        </div>
+    </form>
+
+    <div class="existing_list">
+        <h2 class="h2_body">Membership Degrees for Test Values</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Value (x)</th>
+                    <th>Membership Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if tests %}
+                    {% for test in tests %}
+                    <tr>
+                        <td>{{ test.x }}</td>
+                        <td>{{ test.membership|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="2">No test values found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <h2 class="h2_body">Crisp Set of Test Values with Non-Zero Membership Degrees</h2>
+            {% if tests %}
+                {% for test in tests %}
+                    {% if test.membership > 0 %}
+                        <p>{{ test.x }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No test values found.</p>
+            {% endif %}
+    </div>
 {% endblock content %}
