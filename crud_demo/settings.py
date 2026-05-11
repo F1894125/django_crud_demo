@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'form.apps.FormConfig',
     'fuzzy.apps.FuzzyConfig',
     'student.apps.StudentConfig',
+    'sessions_sandbox.apps.SessionsSandboxConfig',
 ]
 
 MIDDLEWARE = [

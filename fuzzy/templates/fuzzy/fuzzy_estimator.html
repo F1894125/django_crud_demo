@@ -1,3 +1,4 @@
+{% load static %}
 {% extends "fuzzy/base.html" %}
 
 
@@ -7,6 +8,8 @@
 
 
 {% block content %}
+    <script src="{% static 'js/multi_estimator.js' %}"></script>
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert {{ message.tags}}">{{ message }}</div>

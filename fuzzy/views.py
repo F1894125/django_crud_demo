@@ -152,6 +152,29 @@ def fuzzy_gaussian(request):
     return render(request, 'fuzzy/fuzzy_estimator.html', context)
 
 
+def fuzzy_crisp(request):
+    if request.method == 'POST':
+        if all(request.POST.values()):
+            new_entry_count = int(request.POST.get('new_entry_count'))
+            fuzzy_set = {}
+            for i in range(new_entry_count):
+                fuzzy_set[request.POST.get(f'element_{i}')] = float(request.POST.get(f'membership_{i}'))
+            
+            crisp_set = set(key for key, value in fuzzy_set.items() if value >= 0.0)
+            context = {
+                'fuzzy_set': fuzzy_set,
+                'crisp_set': crisp_set
+            }
+            messages.success(request, f'All {new_entry_count} new entries added.')
+            return render(request, 'fuzzy/fuzzy_crisp.html', context)
+        
+        else:
+            messages.error(request, 'Please fill in all the fields.')
+            return render(request, 'fuzzy/fuzzy_crisp.html')
+    
+    return render(request, 'fuzzy/fuzzy_crisp.html')
+
+
 def delete_test(request):
     context = {}
     

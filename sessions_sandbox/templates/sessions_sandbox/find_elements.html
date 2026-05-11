@@ -1,0 +1,34 @@
+{% extends "sessions_sandbox/base.html" %}
+
+
+{% block title %}
+    <title>Find Elements</title>
+{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Add/Search for Elements in Session Data</h1>
+    <form class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <label for="new_elements">Enter elements (separated by spaces) to add or search in the session data:</label>
+        <input type="text" name="new_elements" id="new_elements" placeholder="e.g., 1 2 3 a b">
+
+        <button type="submit">Add Elements</button>
+    </form>
+
+    {% if difference %}
+        <form class="form_body" action="{% url 'sessions_sandbox:add_elements' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="difference" value="{{ difference|join:' ' }}">
+            <div class="button_container">
+                <button type="submit">Keep Elements</button>
+                <a href="{% url "sessions_sandbox:reset_session" %}">Clear Data</a>
+            </div>
+        </form>
+    {% endif %}
+{% endblock content %}

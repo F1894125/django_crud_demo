@@ -6,4 +6,5 @@ urlpatterns = [
     path('form/', include('form.urls', namespace='form')),
     path('fuzzy/', include('fuzzy.urls', namespace='fuzzy')),
     path('student/', include('student.urls', namespace='student')),
+    path('sessions_sandbox/', include('sessions_sandbox.urls', namespace='sessions_sandbox')),
 ]

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         table_container.appendChild(paragraph);
 
         const new_entry_table = document.createElement("table");
-        new_entry_table.id = "dynamic_table";
+        new_entry_table.id = "new_entry_table";
 
         const thead = document.createElement("thead");
         const header_row = document.createElement("tr");

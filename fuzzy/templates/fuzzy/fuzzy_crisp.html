@@ -1,0 +1,49 @@
+{% extends "fuzzy/base.html" %}
+{% load static %}
+
+
+{% block title %}
+    <title>Fuzzy and Crisp Set Estimator</title>
+{% endblock title %}
+
+
+{% block content %}
+    <script src="{% static 'js/fuzzy_crisp.js' %}"></script>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="h1_body">Fuzzy and Crisp Set Estimator</h1>
+    <form class="form_body" action="" method="POST">
+        {% csrf_token %}
+        <label for="new_entry_count">Enter the number of new entries you want to add:</label>
+        <input type="text" name="new_entry_count" id="new_entry_count" placeholder="e.g., 3">
+
+        <button type="button" id="add_rows">Add Rows</button>
+
+        <div id="new_entries_container" class="existing_list">
+            <p>(After entering the number of new entries, click "Add Rows" to generate input fields for each entry.)</p>
+        </div>
+    </form>
+
+    <div class="existing_list">
+        {% if fuzzy_set %}
+            <h2 class="h2_body">Fuzzy Set</h2>
+            {{ fuzzy_set }}
+        {% else %}
+            <p>No fuzzy set found.</p>
+        {% endif %}
+
+        <br>
+
+        {% if crisp_set %}
+            <h2 class="h2_body">Crisp Set</h2>
+            {{ crisp_set }}
+        {% else %}
+            <p>No crisp set found.</p>
+        {% endif %}
+    </div>
+{% endblock content %}
