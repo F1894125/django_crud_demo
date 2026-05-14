@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'fuzzy.apps.FuzzyConfig',
     'student.apps.StudentConfig',
     'sessions_sandbox.apps.SessionsSandboxConfig',
+    'library.apps.LibraryConfig',
 ]
 
 MIDDLEWARE = [

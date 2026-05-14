@@ -7,4 +7,5 @@ urlpatterns = [
     path('fuzzy/', include('fuzzy.urls', namespace='fuzzy')),
     path('student/', include('student.urls', namespace='student')),
     path('sessions_sandbox/', include('sessions_sandbox.urls', namespace='sessions_sandbox')),
+    path('library/', include('library.urls', namespace='library')),
 ]

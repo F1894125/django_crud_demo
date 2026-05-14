@@ -1,0 +1,48 @@
+{% extends "library/base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Add a Book</title>
+{% endblock title %}
+
+{% block content %}
+    <h1 class="mt-4 text-center text-success">Add a Book</h1>
+
+    <form method="POST" class="mt-4 form-group">
+        {% csrf_token %}
+
+        <div class="row mb-3">
+            <label for="title" class="col-sm-2 col-form-label ms-3">Title:</label>
+            <div class="col-sm-9">
+                <input type="text" name="title" id="title" class="form-control" placeholder="Lord of the Rings">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="author" class="col-sm-2 col-form-label ms-3">Author:</label>
+            <div class="col-sm-9">
+                <input type="text" name="author" id="author" class="form-control" placeholder="JRR Tolkien">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="genre" class="col-sm-2 col-form-label ms-3">Genre:</label>
+            <div class="col-sm-9">
+                <input type="text" name="genre" id="genre" class="form-control" placeholder="Fantasy">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="summary" class="col-sm-2 col-form-label ms-3">Summary:</label>
+            <div class="col-sm-9">
+                <input type="text" name="summary" id="summary" class="form-control" placeholder="One Ring to rule them all">
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </div>
+    </form>
+
+    <script src="{% static 'js/empty_form_check.js' %}"></script>
+{% endblock content %}
